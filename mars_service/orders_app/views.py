@@ -9,25 +9,25 @@ def mainpage(request):
                 "button_link": "admin",
                 "name": "Заявки",
                 "overview": "Работа с заявками на оборудование",
-                "img_src": "https://ru.tripaggregator.com/photos/7166724.jpeg"
+                "img_src": "{% static '1.png' %}"
             },
             {
                 "button_link": "#",
                 "name": "Персонал",
                 "overview": "Работа с базами персонала",
-                "img_src": "https://www.hrhome.ru/images/upload/article2/personal-chto-eto-takoe-podgotovka-upravlenie.png"
+                "img_src": "{% static '2.png' %}"
             },
             {
                 "button_link": "#",
                 "name": "Финансы",
                 "overview": "Работа с базами финансов",
-                "img_src": "https://www.psychologos.ru/images/2ecc3f71141ef238dccbc1d31e669d4a.jpg"
+                "img_src": "3.png"
             },
             {
                 "button_link": "#",
                 "name": "База знаний",
                 "overview": "Работа с базами знаний",
-                "img_src": "http://mospravda.ru/wp-content/uploads/2019/11/181108142443-large-c-800x509.jpg"
+                "img_src": "{% static '4.png' %}"
             },
         ]
     }
