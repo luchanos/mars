@@ -22,5 +22,5 @@ import orders_app.views
 urlpatterns = [
     path('orders_app/', include('orders_app.urls')),
     path('admin/', admin.site.urls),
-    path('', orders_app.views.home, name='home'),
+    path('', orders_app.views.mainpage, name='mainpage'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
