@@ -1,0 +1,21 @@
+http {
+        server {
+                listen 80;
+                server_name luchanos.ru;
+
+                location /say_hello {
+                        return 200 'Hello mutherfucker!';
+                }
+
+                location / {
+                include proxy_params;
+                proxy_pass http://unix:/run/gunicorn.sock;
+                }
+
+                location /static {
+                        root /home/nnsviridov/PythonProjects/mars/mars_service/;
+                }
+
+        }
+
+}
