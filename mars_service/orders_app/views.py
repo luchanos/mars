@@ -1,6 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from orders_app.models import Device
+
 
 def mainpage(request):
     data = {
@@ -37,3 +39,8 @@ def mainpage(request):
 def test_thing(request):
     l = {1: 2, "l": [1, 2, 3, 4]}
     return render(request, "orders_app/test_thing.html", l)
+
+
+def get_devices(request):
+    devices = Device.objects.all()
+    return render(request, "orders_app/table_part.html", {"devices": devices})
