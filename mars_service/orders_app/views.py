@@ -6,6 +6,7 @@ from orders_app.models import Device
 
 def mainpage(request):
     data = {
+        "title": "Welcome to MARS!",
         "data": [
             {
                 "button_link": "admin",
@@ -44,3 +45,7 @@ def test_thing(request):
 def get_devices(request):
     devices = Device.objects.all()
     return render(request, "orders_app/table_part.html", {"devices": devices})
+
+
+def test(request):
+    return render(request, "orders_app/test.html", {"title": "TEST!"})
