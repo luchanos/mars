@@ -13,24 +13,28 @@
   </head>
   <body>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Manufacturer</th>
-        <th scope="col">Model</th>
-      </tr>
-    </thead>
+
+
+
+
+
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Идентификатор</th>
+      <th scope="col">Производитель</th>
+      <th scope="col">Модель</th>
+    </tr>
+  </thead>
     <tbody>
       {% for device in devices %}
       <tr>
-        <th scope="row">1</th>
+        <th scope="row">{{device.id}}</th>
         <td>{{device.manufacturer}}</td>
         <td>{{device.model}}</td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
-
   </body>
 </html>
