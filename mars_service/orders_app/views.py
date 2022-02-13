@@ -15,19 +15,19 @@ def mainpage(request):
                 "img_src": "{% static '1.png' %}"
             },
             {
-                "button_link": "#",
+                "button_link": "devpage",
                 "name": "Персонал",
                 "overview": "Работа с базами персонала",
                 "img_src": "{% static '2.png' %}"
             },
             {
-                "button_link": "#",
+                "button_link": "devpage",
                 "name": "Финансы",
                 "overview": "Работа с базами финансов",
                 "img_src": "3.png"
             },
             {
-                "button_link": "#",
+                "button_link": "devpage",
                 "name": "База знаний",
                 "overview": "Работа с базами знаний",
                 "img_src": "{% static '4.png' %}"
@@ -49,3 +49,7 @@ def get_devices(request):
 
 def test(request):
     return render(request, "orders_app/test.html", {"title": "TEST!"})
+
+
+def devpage(request):
+    return render(request, "orders_app/devpage.html", {"title": "Oops!"})
