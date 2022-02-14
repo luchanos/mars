@@ -1,7 +1,8 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 from orders_app.models import Device
+from orders_app.forms import NameForm
 
 
 def mainpage(request):
@@ -43,12 +44,46 @@ def test_thing(request):
 
 
 def get_devices(request):
-    devices = Device.objects.all()
-    return render(request, "orders_app/table_part.html", {"devices": devices})
+    devices = []
+    if request.method == 'POST':
+        form = NameForm(request.POST)
+
+        if form.is_valid():
+            search_res = []
+            data_for_search = form.data['your_name']
+            devices = Device.objects.all()
+
+            for el in devices:
+                if data_for_search in {el.model, el.manufacturer, el.id}:
+                    search_res.append(el)
+
+            return render(request, "orders_app/table_part.html", {"devices": search_res, "form": form})
+
+    else:
+        form = NameForm()
+
+    return render(request, "orders_app/table_part.html", {"devices": devices, "form": form})
 
 
 def test(request):
-    return render(request, "orders_app/test.html", {"title": "TEST!"})
+    if request.method == 'POST':
+        form = NameForm(request.POST)
+
+        if form.is_valid():
+            search_res = []
+            data_for_search = form.data['your_name']
+            devices = Device.objects.all()
+
+            for el in devices:
+                if data_for_search in {el.model, el.manufacturer, el.id}:
+                    search_res.append(el)
+
+            return render(request, "orders_app/table_part.html", {"devices": search_res})
+
+    else:
+        form = NameForm()
+
+    return render(request, 'orders_app/test.html', {'form': form})
 
 
 def devpage(request):

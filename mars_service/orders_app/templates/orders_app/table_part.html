@@ -2,6 +2,24 @@
 
 {% block content %}
 
+<!--<form action="/devices/" method="post">-->
+<!--  {% csrf_token %}-->
+<!--  <div class="input-group mb-3">-->
+<!--    <input type="text" class="form-control" placeholder="Enter model, manufacturer or id..." aria-label="Recipient's username" aria-describedby="basic-addon2" name="your_name" value="{{ current_name }}">-->
+<!--    <div class="input-group-append">-->
+<!--      <button class="btn btn-outline-secondary" type="submit" value="OK">Search</button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</form>-->
+
+<form action="/devices/" method="post">
+  {% csrf_token %}
+  {{ form }}
+  <div>
+    <button class="btn btn-outline-secondary" type="submit" value="OK">Search</button>
+  </div>
+</form>
+
   <table class="table table-hover">
   <thead>
     <tr>
