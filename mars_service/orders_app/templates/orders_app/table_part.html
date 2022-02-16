@@ -2,38 +2,40 @@
 
 {% block content %}
 
-<!--<form action="/devices/" method="post">-->
-<!--  {% csrf_token %}-->
-<!--  <div class="input-group mb-3">-->
-<!--    <input type="text" class="form-control" placeholder="Enter model, manufacturer or id..." aria-label="Recipient's username" aria-describedby="basic-addon2" name="your_name" value="{{ current_name }}">-->
-<!--    <div class="input-group-append">-->
-<!--      <button class="btn btn-outline-secondary" type="submit" value="OK">Search</button>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</form>-->
-
 <form action="/devices/" method="post">
   {% csrf_token %}
-  {{ form }}
-  <div>
-    <button class="btn btn-outline-secondary" type="submit" value="OK">Search</button>
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Enter model, manufacturer or id..." aria-label="Recipient's username" aria-describedby="basic-addon2" name="data_for_search" value="{{ current_name }}">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="submit" value="OK">Search</button>
+    </div>
   </div>
 </form>
+
+<!--<form action="/devices/" method="post">-->
+<!--  <div>-->
+<!--  {% csrf_token %}-->
+<!--  {{ form }}-->
+<!--    <button class="btn btn-outline-secondary" type="submit" value="OK">Search</button>-->
+<!--  </div>-->
+<!--</form>-->
 
   <table class="table table-hover">
   <thead>
     <tr>
-      <th scope="col">Идентификатор</th>
-      <th scope="col">Производитель</th>
-      <th scope="col">Модель</th>
+      <th scope="col">Серийный номер</th>
+      <th scope="col">Пользователь</th>
+      <th scope="col">Оборудование</th>
+      <th scope="col">Статус принадлежности</th>
     </tr>
   </thead>
     <tbody>
       {% for device in devices %}
       <tr>
         <th scope="row">{{device.id}}</th>
-        <td>{{device.manufacturer}}</td>
-        <td>{{device.model}}</td>
+        <td>{{device.customer}}</td>
+        <td>{{device.analyzer}}</td>
+        <td>{{device.owner_status}}</td>
       </tr>
       {% endfor %}
     </tbody>

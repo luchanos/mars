@@ -31,7 +31,7 @@ class Customer(models.Model):
     customer_city = models.TextField(verbose_name="Город")
 
     def __str__(self):
-        return f"{self.customer_name} по адресу {self.customer_address}"
+        return f"{self.customer_name} по адресу: {self.customer_address}"
 
 
 class DeviceInField(models.Model):
@@ -42,7 +42,7 @@ class DeviceInField(models.Model):
         verbose_name = "Оборудование в полях"
         verbose_name_plural = "Оборудование в полях"
 
-    serial_number = models.TextField(verbose_name='Серийный номер')
+    serial_number = models.TextField(verbose_name="Серийный номер")
     customer = models.ForeignKey(Customer, on_delete=models.RESTRICT, verbose_name="Пользователь")
     analyzer = models.ForeignKey(Device, on_delete=models.RESTRICT, verbose_name="Оборудование")
     owner_status = models.TextField(verbose_name="Статус принадлежности")

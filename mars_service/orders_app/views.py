@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
-from orders_app.models import Device
+from orders_app.models import Device, DeviceInField
 from orders_app.forms import NameForm
 
 
@@ -44,25 +44,24 @@ def test_thing(request):
 
 
 def get_devices(request):
-    devices = []
+    devices = DeviceInField.objects.all()
     if request.method == 'POST':
         form = NameForm(request.POST)
 
         if form.is_valid():
             search_res = []
-            data_for_search = form.data['your_name']
-            devices = Device.objects.all()
+            data_for_search = form.data['data_for_search']
 
-            for el in devices:
-                if data_for_search in {el.model, el.manufacturer, el.id}:
-                    search_res.append(el)
+            if data_for_search.isdigit():
+                search_res = list(DeviceInField.objects.filter(analyzer_id=int(data_for_search)))
+            search_res = set(list(DeviceInField.objects.filter(customer__customer_name__contains=data_for_search)) + \
+                             list(DeviceInField.objects.filter(analyzer__manufacturer__contains=data_for_search)) + \
+                             list(DeviceInField.objects.filter(analyzer__model__contains=data_for_search)) + \
+                             list(DeviceInField.objects.filter(owner_status__contains=data_for_search)) + search_res)
 
             return render(request, "orders_app/table_part.html", {"devices": search_res, "form": form})
 
-    else:
-        form = NameForm()
-
-    return render(request, "orders_app/table_part.html", {"devices": devices, "form": form})
+    return render(request, "orders_app/table_part.html", {"devices": devices})
 
 
 def test(request):
@@ -71,7 +70,7 @@ def test(request):
 
         if form.is_valid():
             search_res = []
-            data_for_search = form.data['your_name']
+            data_for_search = form.data['data_for_search']
             devices = Device.objects.all()
 
             for el in devices:
