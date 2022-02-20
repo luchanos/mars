@@ -24,6 +24,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', orders_app.views.mainpage, name='mainpage'),
     path('devices/', orders_app.views.get_devices, name='get_devices'),
-    path('test/', orders_app.views.test, name='test'),
-    path('devpage/', orders_app.views.devpage, name='devpage')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

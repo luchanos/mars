@@ -1,4 +1,3 @@
-from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 from orders_app.models import Device, DeviceInField
@@ -38,11 +37,6 @@ def mainpage(request):
     return render(request, "orders_app/mainpage.html", data)
 
 
-def test_thing(request):
-    l = {1: 2, "l": [1, 2, 3, 4]}
-    return render(request, "orders_app/test_thing.html", l)
-
-
 def get_devices(request):
     devices = DeviceInField.objects.all()
     if request.method == 'POST':
@@ -62,28 +56,3 @@ def get_devices(request):
             return render(request, "orders_app/table_part.html", {"devices": search_res, "form": form})
 
     return render(request, "orders_app/table_part.html", {"devices": devices})
-
-
-def test(request):
-    if request.method == 'POST':
-        form = NameForm(request.POST)
-
-        if form.is_valid():
-            search_res = []
-            data_for_search = form.data['data_for_search']
-            devices = Device.objects.all()
-
-            for el in devices:
-                if data_for_search in {el.model, el.manufacturer, el.id}:
-                    search_res.append(el)
-
-            return render(request, "orders_app/table_part.html", {"devices": search_res})
-
-    else:
-        form = NameForm()
-
-    return render(request, 'orders_app/test.html', {'form': form})
-
-
-def devpage(request):
-    return render(request, "orders_app/devpage.html", {"title": "Oops!"})
