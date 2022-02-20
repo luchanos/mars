@@ -56,3 +56,7 @@ def get_devices(request):
             return render(request, "orders_app/table_part.html", {"devices": search_res, "form": form})
 
     return render(request, "orders_app/table_part.html", {"devices": devices})
+
+
+def devpage(request):
+    return render(request, "orders_app/devpage.html", {"title": "Oops!"})
