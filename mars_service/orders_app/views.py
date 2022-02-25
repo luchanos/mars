@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from orders_app.models import Device, DeviceInField
-from orders_app.forms import NameForm
+from orders_app.forms import SearchForm
 
 
 def mainpage(request):
@@ -36,7 +36,7 @@ def mainpage(request):
 def get_devices(request):
     devices = DeviceInField.objects.all()
     if request.method == 'POST':
-        form = NameForm(request.POST)
+        form = SearchForm(request.POST)
 
         if form.is_valid():
             search_res = []
