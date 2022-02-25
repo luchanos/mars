@@ -1,7 +1,10 @@
+from django.contrib.auth.models import Group, User
 from django.shortcuts import render
 
 from orders_app.models import Device, DeviceInField
 from orders_app.forms import SearchForm
+
+from orders_app.forms import SignUpForm
 
 
 def mainpage(request):
@@ -56,3 +59,17 @@ def get_devices(request):
 
 def devpage(request):
     return render(request, "orders_app/devpage.html", {"title": "Oops!"})
+
+
+def sign_up_view(request):
+    if request.method == "POST":
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.clean_data.get("username")
+            signup_user = User.objects.get(username=username)
+            user_group = Group.objects.get(name='User')
+            user_group.user_set.add(signup_user)
+    else:
+        form = SignUpForm()
+    return render(request, 'orders_app/signup.html', {'form': form})

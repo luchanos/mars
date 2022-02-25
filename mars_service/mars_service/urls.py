@@ -24,5 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', orders_app.views.mainpage, name='mainpage'),
     path('devices/', orders_app.views.get_devices, name='get_devices'),
-    path('devpage/', orders_app.views.devpage, name='devpage')
+    path('devpage/', orders_app.views.devpage, name='devpage'),
+    path('account/create/', orders_app.views.sign_up_view, name='signup')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
