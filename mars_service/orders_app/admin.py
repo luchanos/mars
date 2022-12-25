@@ -2,6 +2,8 @@ from django.contrib import admin
 
 # Register your models here.
 from django.contrib import admin
+from django.core.exceptions import ValidationError
+from django.db import models
 
 from .models import Order, Device, Customer, DeviceInField
 

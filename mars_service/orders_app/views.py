@@ -1,10 +1,10 @@
 from django.contrib.auth.models import Group, User
+from django.forms import BooleanField
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 from orders_app.models import Device, DeviceInField
-from orders_app.forms import SearchForm
-
-from orders_app.forms import SignUpForm
+from orders_app.forms import SignUpForm, NameForm, SettingsForm, SearchForm
 
 
 def mainpage(request):
@@ -72,4 +72,31 @@ def sign_up_view(request):
             user_group.user_set.add(signup_user)
     else:
         form = SignUpForm()
-    return render(request, 'orders_app/signup.html', {'form': form})
+    return render(request, 'orders_app/test.html', {'form': form})
+
+
+def get_name(request):
+    from random import randint
+
+    d = {str(k): BooleanField() for k, v in enumerate(range(randint(1, 10)))}
+    SettingsFormMine = type("SettingsFormMine", (SettingsForm,), d)
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = SettingsFormMine(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/thanks/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = SettingsFormMine()
+
+    return render(request, 'orders_app/name.html', {'form': form})
+
+
+def your_name(request):
+    return 123
